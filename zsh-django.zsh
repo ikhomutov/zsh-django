@@ -89,14 +89,14 @@ _managepy_migrations() {
   _values 'Migrations' $migrations && ret=0
 }
 
-_managepy-changepassword() {
+_managepy_complete_changepassword() {
   _arguments -s : \
     '*::username:_managepy_usernames' \
     $db_args \
     $nul_args && ret=0
 }
 
-_managepy-check() {
+_managepy_complete_check() {
   _arguments -s : \
     "*::appname:_managepy_applabels" \
     "--tag=-[Run only checks labeled with given tag.]" \
@@ -106,7 +106,7 @@ _managepy-check() {
     $nul_args && ret=0
 }
 
-_managepy-collectstatic(){
+_managepy_complete_collectstatic(){
   _arguments -s : \
     "--link[Create a symbolic link to each file instead of copying.]" \
     "--no-post-process[Do NOT post process collected files.]" \
@@ -119,7 +119,7 @@ _managepy-collectstatic(){
     $nul_args && ret=0
 }
 
-_managepy-compilemessages(){
+_managepy_complete_compilemessages(){
   _arguments -s : \
     {-l,--locale=}"[Locale(s) to process (e.g. de_AT). Default is to process all. Can be used multiple times.]" \
     {-x,--exclude=}"[Locales to exclude. Default is none. Can be used multiple times.]" \
@@ -127,14 +127,14 @@ _managepy-compilemessages(){
     $nul_args && ret=0
 }
 
-_managepy-createcachetable(){
+_managepy_complete_createcachetable(){
   _arguments -s : \
     "--dry-run[Does not create the table, just prints the SQL that would be run.]" \
     $db_args \
     $nul_args && ret=0
 }
 
-_managepy-createsuperuser(){
+_managepy_complete_createsuperuser(){
   _arguments -s : \
     "--username=-[Specifies the login for the superuser.]" \
     $db_args \
@@ -142,13 +142,13 @@ _managepy-createsuperuser(){
     $nul_args && ret=0
 }
 
-_managepy-dbshell(){
+_managepy_complete_dbshell(){
   _arguments -s : \
     $db_args \
     $nul_args && ret=0
 }
 
-_managepy-diffsettings(){
+_managepy_complete_diffsettings(){
   _arguments -s : \
     "--all[Display all settings, regardless of their value.]" \
     "--default=-[The settings module to compare the current settings against. Leave empty to compare against Django's default settings.]" \
@@ -156,7 +156,7 @@ _managepy-diffsettings(){
     $nul_args && ret=0
 }
 
-_managepy-dumpdata(){
+_managepy_complete_dumpdata(){
   _arguments -s : \
     "*::appname:_managepy_applabels" \
     "--format=-[Specifies the output serialization format for fixtures.]:format:(json yaml xml)" \
@@ -171,25 +171,25 @@ _managepy-dumpdata(){
     $nul_args && ret=0
 }
 
-_managepy-findstatic() {
+_managepy_complete_findstatic() {
   _arguments -s : \
     "--first[Only return the first match for each static file.]" \
     $nul_args && ret=0
 }
 
-_managepy-flush(){
+_managepy_complete_flush(){
   _arguments -s : \
     $db_args \
     $nul_args && ret=0
 }
 
-_managepy-help(){
+_managepy_complete_help(){
   _arguments -s : \
     "*:command:_managepy_commands" \
     $nul_args && ret=0
 }
 
-_managepy-inspectdb(){
+_managepy_complete_inspectdb(){
   _arguments -s : \
     "--include-partitions[Also output models for partition tables.]" \
     "--include-views[Also output models for database views.]" \
@@ -197,7 +197,7 @@ _managepy-inspectdb(){
     $nul_args && ret=0
 }
 
-_managepy-loaddata(){
+_managepy_complete_loaddata(){
   _arguments -s : \
     "--app=-[Only look for fixtures in the specified app.]:appname:_managepy_applabels" \
     "(-i --ignorenonexistent)"{-i,--ignorenonexistent}"[Ignores entries in the serialized data for fields that do not currently exist on the model.]" \
@@ -208,7 +208,7 @@ _managepy-loaddata(){
     $nul_args && ret=0
 }
 
-_managepy-makemessages(){
+_managepy_complete_makemessages(){
   _arguments -s : \
     {-l,--locale=}"[Creates or updates the message files for the given locale(s) (e.g. pt_BR).]" \
     "(-d --domain)"{-d,--domain=}"[The domain of the message files (default: 'django').]" \
@@ -225,7 +225,7 @@ _managepy-makemessages(){
     $nul_args && ret=0
 }
 
-_managepy-makemigrations(){
+_managepy_complete_makemigrations(){
   _arguments -s : \
     "*::appname:_managepy_applabels" \
     "--dry-run[Just show what migrations would be made]" \
@@ -238,7 +238,7 @@ _managepy-makemigrations(){
     $nul_args && ret=0
 }
 
-_managepy-migrate() {
+_managepy_complete_migrate() {
   _arguments -s : \
     "1::appname:_managepy_apps_with_migrations" \
     "2::migration:_managepy_migrations" \
@@ -251,7 +251,7 @@ _managepy-migrate() {
     $nul_args && ret=0
 }
 
-_managepy-runserver(){
+_managepy_complete_runserver(){
   _arguments -s : \
     "(-6 --ipv6)"{-6,--ipv6}"[Tells Django to use an IPv6 address.]" \
     "--nothreading[Tells Django to NOT use threading.]" \
@@ -261,14 +261,14 @@ _managepy-runserver(){
     $nul_args && ret=0
 }
 
-_managepy-sendtestemail() {
+_managepy_complete_sendtestemail() {
   _arguments -s : \
     "--managers[Send a test email to the addresses specified in settings.MANAGERS.]" \
     "--admins[Send a test email to the addresses specified in settings.ADMINS.]" \
     $nul_args && ret=0
 }
 
-_managepy-shell() {
+_managepy_complete_shell() {
   _arguments -s : \
     "--no-startup=-[When using plain Python, ignore the PYTHONSTARTUP environment variable and ~/.pythonrc.py script.]" \
     "(-i --interface)"{-i,--interface=}"[Specify an interactive interpreter interface. Available options: 'ipython', 'bpython', and 'python']:::(ipython bpython python)" \
@@ -276,7 +276,7 @@ _managepy-shell() {
     $nul_args && ret=0
 }
 
-_managepy-showmigrations() {
+_managepy_complete_showmigrations() {
   _arguments -s : \
     "*::appname:_managepy_applabels" \
     "(-l --list)"{-l,--list}"[Shows a list of all migrations and which are applied.]" \
@@ -285,13 +285,13 @@ _managepy-showmigrations() {
     $nul_args && ret=0
 }
 
-_managepy-sqlflush(){
+_managepy_complete_sqlflush(){
   _arguments -s : \
     $db_args \
     $nul_args && ret=0
 }
 
-_managepy-sqlmigrate(){
+_managepy_complete_sqlmigrate(){
   _arguments -s : \
     "1::appname:_managepy_apps_with_migrations" \
     "2::migration:_managepy_migrations" \
@@ -300,14 +300,14 @@ _managepy-sqlmigrate(){
     $nul_args && ret=0
 }
 
-_managepy-sqlsequencereset(){
+_managepy_complete_sqlsequencereset(){
   _arguments -s : \
     "*::appname:_managepy_applabels" \
     $db_args \
     $nul_args && ret=0
 }
 
-_managepy-squashmigrations(){
+_managepy_complete_squashmigrations(){
   _arguments -s : \
     "1::appname:_managepy_apps_with_migrations" \
     "--no-optimize[Do not try to optimize the squashed operations.]" \
@@ -317,7 +317,7 @@ _managepy-squashmigrations(){
     $nul_args && ret=0
 }
 
-_managepy-startapp(){
+_managepy_complete_startapp(){
   _arguments -s : \
     "--template=-[The path or URL to load the template from.]:directory:_directories" \
     {-e,--extension}"=-[The file extension(s) to render (default: 'py'). Separate multiple extensions with commas, or use -e multiple times.]" \
@@ -325,7 +325,7 @@ _managepy-startapp(){
     $nul_args && ret=0
 }
 
-_managepy-test() {
+_managepy_complete_test() {
   _arguments -s : \
     "--failfast[Tells Django to stop running the test suite after first failed test.]" \
     "--testrunner=-[Tells Django to use specified test runner class instead of the one specified by the TEST_RUNNER setting.]" \
@@ -343,7 +343,7 @@ _managepy-test() {
     $nul_args && ret=0
 }
 
-_managepy-testserver(){
+_managepy_complete_testserver(){
   _arguments -s : \
     "(-6 --ipv6)"{-6,--ipv6}"[Tells Django to use an IPv6 address.]" \
     "--addrport=-[Port number or ipaddr:port to run the server on.]" \
@@ -372,7 +372,7 @@ _managepy() {
   else
     shift words
     (( CURRENT -- ))
-    curcontext="${curcontext%:*:*}:managepy-$words[1]:"
+    curcontext="${curcontext%:*:*}:managepy_complete_$words[1]:"
     _call_function ret _managepy-$words[1]
   fi
 }
