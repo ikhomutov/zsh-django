@@ -45,6 +45,13 @@ managepy_noinput_arg=(
   '--noinput[Tells Django to NOT prompt the user for input of any kind.]'
 )
 
+typeset -ga managepy_start_args
+managepy_start_args=(
+    "--template=[The path or URL to load the template from.]:directory:_directories" \
+    {-e,--extension=}"[The file extension(s) to render (default: 'py'). Separate multiple extensions with commas, or use -e multiple times.]" \
+    {-n,--name=}"[The file name(s) to render. Separate multiple file names with commas, or use -n multiple times.]::_files"
+)
+
 _managepy_applabels() {
   local line
   local -a apps
@@ -53,7 +60,7 @@ _managepy_applabels() {
         \"import sys; from django.apps import apps;\\
           [sys.stdout.write(app.label + '\n') for app in apps.get_app_configs()]\"" \
     | while read -A line; do apps=($line $apps) done
-  _values 'Application' $apps && ret=0
+  _values 'Applications' $apps && ret=0
 }
 
 _managepy_usernames() {
@@ -321,9 +328,7 @@ _managepy_complete_squashmigrations(){
 
 _managepy_complete_startapp(){
   _arguments -s : \
-    "--template=[The path or URL to load the template from.]:directory:_directories" \
-    {-e,--extension=}"[The file extension(s) to render (default: 'py'). Separate multiple extensions with commas, or use -e multiple times.]" \
-    {"(-n)--name=","(--name)-n"}"[The file name(s) to render.]:file:_files"
+    $managepy_start_args \
     $managepy_base_args && ret=0
 }
 
@@ -380,6 +385,7 @@ _managepy() {
       _managepy_commands
       ;;
     args)
+      curcontext="${curcontext%:*:*}:managepy-$words[1]:"
       _call_function ret _managepy_complete_$words[1]
       ;;
   esac
