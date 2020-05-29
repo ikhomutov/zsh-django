@@ -1,3 +1,4 @@
+#compdef manage.py
 alias dj='manage.py'
 alias djcct='manage.py createcachetable'
 alias djcme='manage.py compilemessages'
@@ -37,12 +38,12 @@ managepy_base_args=(
 
 typeset -ga managepy_db_arg
 managepy_db_arg=(
-  '--database=[Nominates a database. Defaults to the "default" database.]:database'
+  "--database=[Nominates a database. Defaults to the "default" database.]:database"
 )
 
 typeset -ga managepy_noinput_arg
 managepy_noinput_arg=(
-  '--noinput[Tells Django to NOT prompt the user for input of any kind.]'
+  "--noinput[Tells Django to NOT prompt the user for input of any kind.]"
 )
 
 typeset -ga managepy_start_args
@@ -174,7 +175,7 @@ _managepy_complete_dumpdata(){
     "--natural-primary[Use natural primary keys if they are available.]" \
     {"(-a)--all","(--all)-a"}"[Use Django's base manager to dump all models stored in the database.]" \
     "--pks=[Only dump objects with given primary keys.]:primary_keys" \
-    {"(-o)--output=","(--output)-o"}"[Specifies file to which the output is written.]:output"
+    {"(-o)--output=","(--output)-o"}"[Specifies file to which the output is written.]:output" \
     $managepy_db_arg \
     $managepy_base_args && ret=0
 }
